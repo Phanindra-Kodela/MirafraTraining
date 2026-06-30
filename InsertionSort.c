@@ -8,9 +8,10 @@ void swap(int *ptr1, int *ptr2){
 	*ptr2 = temp;
 }
 
-int InsertionSort(const int size, int* list){
+int* InsertionSort(const int size, int* list){
 
-	int NoOfComparisonsMade = 0;
+	int *ptr = (int*)malloc(sizeof(int)*2);
+	int NoOfComparisonsMade = 0, NoOfSwapsMade = 0;
 	
 	for(int i = 1; i < size; i++){
 		
@@ -22,11 +23,14 @@ int InsertionSort(const int size, int* list){
 			
 			NoOfComparisonsMade++;
 			swap(&list[j], &list[j-1]);
+			NoOfSwapsMade++;
 			j--;
 		}
 	}
 
-	return NoOfComparisonsMade;
+	ptr[0] = NoOfComparisonsMade;
+	ptr[1] = NoOfSwapsMade;
+	return ptr;
 }
 
 int main(){
@@ -44,7 +48,9 @@ int main(){
         for(int i = 0; i < NoOfElements; i++)
 		scanf("%d", list+i);	
 
-	int NoOfComparisonsRequired = InsertionSort(NoOfElements, list);
+	int *ptr = InsertionSort(NoOfElements, list);
+	int NoOfComparisonsRequired = ptr[0];
+	int NoOfSwapsRequired = ptr[1];
 
 	// print sorted list
 	printf("After Sorting: ");
@@ -54,6 +60,9 @@ int main(){
 	printf("\n");
 
 	printf("No of Comparisons: %d\n", NoOfComparisonsRequired);
-	
+	printf("No of Swaps: %d\n", NoOfSwapsRequired);
+
+	free(list);
+	free(ptr);
 	return 0;
 }
