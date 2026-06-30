@@ -8,16 +8,19 @@ void swap(int *ptr1, int* ptr2){
 	*ptr2 = temp;
 }
 
-void BubbleSort(const int size, int* list){
+int BubbleSort(const int size, int* list){
 	
+	int NoOfComparisonsMade = 0;
 	// swap adjacent elements for n rounds.
 	for(int i = 0; i < size; i++){
 		for(int j = 0; j < size-1; j++){
-			if(list[j]>list[j+1]){
+			NoOfComparisonsMade++;
+			if(list[j]>list[j+1])
 				swap(list+j, list+j+1);
-			}
 		}
 	}
+
+	return NoOfComparisonsMade;
 } 
 
 int main(){
@@ -35,7 +38,7 @@ int main(){
         for(int i = 0; i < NoOfElements; i++)
 		scanf("%d", list+i);	
 
-	BubbleSort(NoOfElements, list);
+	int NoOfComparisonsRequired = BubbleSort(NoOfElements, list);
 
 	// print sorted list
 	printf("After Sorting: ");
@@ -44,5 +47,7 @@ int main(){
 	}
 	printf("\n");
 	
+	printf("No of Comparison Made = %d \n", NoOfComparisonsRequired); 
+
 	return 0;
 }
