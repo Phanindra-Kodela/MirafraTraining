@@ -7,7 +7,7 @@
 int main(){
 
     // open a existing file or create a file and open it
-    int fd = open("data.txt", O_WRONLY|O_CREAT|O_TRUNC, 0755);
+    int fd = open("data.txt", O_WRONLY|O_TRUNC, 0755);
 
     // can't open the file.
     if(fd == -1){
