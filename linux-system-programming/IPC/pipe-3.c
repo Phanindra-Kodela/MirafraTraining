@@ -27,14 +27,18 @@ int main(){
 
         // write to stdout 
         write(STDOUT_FILENO, buf, n);
-        close(fd[0]);
+        close(fd[0]); // good practice to close fds after use
     }else{
         // parent
         // close its own read descriptor otherwise nothing
-        close(fd[0]);
+        close(fd[0]); // good practice to close unused fds
 
         // write to fd[1]
-        write(fd[1], "Hello Child", 11);
+        write(fd[1], "Hello Child\n", 13);
+
+        write(fd[1], "Linux\n", 6);
+        write(fd[1], "System\n", 7);
+        write(fd[1], "Programming\n", 12);
 
         // close write descriptor so read() doesn't get blocked.
         close(fd[1]);
