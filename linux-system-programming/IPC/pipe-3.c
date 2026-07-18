@@ -42,6 +42,8 @@ int main(){
 
         // close write descriptor so read() doesn't get blocked.
         close(fd[1]);
+
+        // to avoid orphan process, reaps child
         wait(NULL);
     }
 
