@@ -45,7 +45,7 @@ int main(){
         // child process
         // execute grep cmd
 
-        // duplicate stdin of grep to pipe read.
+        // duplicate stdin of grep to pipe read descriptor.
         dup2(fd[0], STDIN_FILENO);
 
         // close the pipe descriptors
@@ -61,9 +61,13 @@ int main(){
         _exit(EXIT_FAILURE);
     }
 
+    // closes parents pipe descriptors
     close(fd[0]);
     close(fd[1]);
 
+    // waits for the child processes
+    // specific process pid can be ignored because as the pipe takes care of the 
+    // synchronization naturally with blocking behavior on read, write on pipe.
     wait(NULL);
     wait(NULL);
 
