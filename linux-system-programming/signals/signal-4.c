@@ -6,7 +6,8 @@
 #include <sys/wait.h>
 
 void handler(int sig){
-    printf("\nCaught signal %d", sig);
+    printf("Process: %d\n", getpid());
+    printf("Caught signal %d\n", sig);
 }
 
 int main(){
