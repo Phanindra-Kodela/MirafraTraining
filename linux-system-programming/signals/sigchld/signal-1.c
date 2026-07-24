@@ -40,20 +40,24 @@ int main(){
     pid_t pid = fork();
 
     if(pid == 0){
-        sleep(rand()%5);
+        // each child has its own random number generator state.
+        srand(getpid());
+        sleep(rand()%10);
         _exit(0);
     }else{
         pid_t pid = fork();
         if(pid == 0){
             // second child
-            sleep(rand()%5);
+            srand(getpid());
+            sleep(rand()%10);
             _exit(0);
         }
         else{
             pid_t pid = fork();
             if(pid == 0){
+                srand(getpid());
                 // third child
-                sleep(rand()%5);
+                sleep(rand()%10);
                 _exit(0);
             }
         }
